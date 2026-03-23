@@ -27,7 +27,7 @@ def run(c):
     """
     Executa a aplicacao Flask.
     """
-    c.run("flask run", pty=True)
+    c.run("flask run")
 
 
 @task

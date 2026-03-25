@@ -2,6 +2,7 @@ from invoke import task
 from datetime import datetime
 import os
 import zipfile
+import shutil
 
 @task
 def install(c, dev=True):
@@ -53,6 +54,40 @@ def format(c):
     """
     c.run("black .", pty=True)
 
+@task
+def clean(c):
+    """
+    Exclui arquivos e pastas indesejadas a partir do diretório atual.
+    """
+    excludes = [
+        "venv",
+        "__pycache__",
+        ".git",
+        ".vscode",
+        "delivery.egg-info"
+    ]
+
+    print("→ Iniciando a exclusão dos arquivos e pastas...")
+
+    for root, dirs, files in os.walk(".", topdown=True):
+        
+        for d in list(dirs): 
+            if d in excludes:
+                dir_path = os.path.join(root, d)
+                print(f"  Removendo pasta: {dir_path}")
+                shutil.rmtree(dir_path, ignore_errors=True)
+                dirs.remove(d) 
+
+        for file in files:
+            if file.endswith((".pyc", ".pyo", ".pyd", ".log", ".db", ".sqlite3")):
+                filepath = os.path.join(root, file)
+                print(f"  Removendo arquivo: {filepath}")
+                try:
+                    os.remove(filepath)
+                except OSError:
+                    pass
+
+    print("→ Limpeza concluída com sucesso!")
 
 @task
 def zip_windows(c, name=None):

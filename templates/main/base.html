@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Delivery UVV{% endblock %}</title>
+        {% block css %} {% endblock %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            {% block navbar %}
+                <li><a href="/">Home</a></li>
+                <li><a href="/carrinho">Carrinho</a></li>
+            {% endblock %}
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+            <!-- Conteudo Principal que será renderizado-->
+        {% endblock %}
+    </main>
+    <footer>
+        {% block footer %}
+            <p>&copy: 2026  UVV -Vila Velha ES | Todos os direitos reservados</p>
+        {% endblock %}
+    </footer>
+</body>
+</html>

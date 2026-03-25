@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Home Page - Delivery UVV</title>
-</head>
-<body>
-    <h1> Olá {{ user.username | capitalize}}</h1>
+{% extends 'main/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+    {% block css %}
+        <style>.welcome {color : red; text-align: center; margin: 40px 0;}</style>
+    {% endblock %}
+{% endblock %}
+
+
+
+{% block content %}
+    {% if user %}
+    <h1 class="welcome"> Olá {{ user.username | capitalize}}</h1>
     <p>Bem vindo.</p>
-</body>
-</html>
+    {% else %}
+    <h1> Olá visitante</h1>
+    <p>Você precisa efetuar seu login.</p>
+    {% endif %}
+{% endblock %}

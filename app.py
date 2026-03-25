@@ -7,3 +7,12 @@ def create_app():
     init_main(app)
 
     return app
+
+
+# py .\make_env.pys
+# .\venv\Scripts\activate
+# invoke install
+# $env:FLASK_DEBUG=1
+# $env:FLASK_ENV='development'
+# $env:FLASK_APP='app.py'
+# invoke run

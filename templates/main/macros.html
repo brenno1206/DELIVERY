@@ -1,0 +1,11 @@
+{% macro item_carrinho(item)%}
+<li>
+    <div>
+        <h3>{{item.name}}</h3>
+        <p>Quantidade: {{item.quantidade}} x R$ {{item.preco | round(2)}}</p>
+    </div>
+    <div>
+        R$ {{(item.preco * item.quantidade) | round(2)}}
+    </div>
+</li>
+{% endmacro %}

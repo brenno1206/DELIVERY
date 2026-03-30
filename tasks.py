@@ -36,7 +36,7 @@ def test(c):
     """
     Executa os testes automatizados.
     """
-    c.run("pytest tests -v", pty=True)
+    c.run("pytest tests -v")
 
 
 @task
@@ -44,7 +44,7 @@ def lint(c):
     """
     Verifica qualidade de codigo.
     """
-    c.run("flake8", pty=True)
+    c.run("flake8")
 
 
 @task

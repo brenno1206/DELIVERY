@@ -6,7 +6,7 @@ bp_main  = Blueprint('main', __name__)
 def index():
     user = {'username':'brenno'}
     current_app.logger.info("O endpint 'index' foi acessado")
-    return render_template('main/index.html', user=user)
+    return render_template('main/index.html', user=user, promocao='Segunda é dia de pizza em dobro')
 
 @bp_main.route("/carrinho")
 def carrinho():

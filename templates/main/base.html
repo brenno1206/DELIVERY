@@ -12,8 +12,7 @@
     <header>
         <nav>
             {% block navbar %}
-                <li><a href="/">Home</a></li>
-                <li><a href="/carrinho">Carrinho</a></li>
+              {% include 'main/partials/navbar.html'   %}
             {% endblock %}
         </nav>
     </header>
@@ -24,7 +23,7 @@
     </main>
     <footer>
         {% block footer %}
-            <p>&copy: 2026  UVV -Vila Velha ES | Todos os direitos reservados</p>
+           {% include 'main/partials/footer.html'   %}
         {% endblock %}
     </footer>
 </body>

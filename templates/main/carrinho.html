@@ -1,28 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ titulo | default("Meu Carrinho")}}</title>
-</head>
-<body>
-    {%import '/main/macros.html' as macros%}
-    <h1>Meus pedidos</h1>
-    <ul>
+{% extends 'main/base.html' %}
+
+
+    {% block titulo %}
+    {{ titulo | default("Meu Carrinho")}}
+    {% endblock %}
+    {% block css %}
+        <link rel="stylesheet" href="static/css/style.css">
+    {% endblock %}
+    
+
+{% block content %}
+    
+
+    {% import 'main/macros.html' as macros %}
+    <h1>Meu Carrinho</h1>
+
+    <ul class="itens-carrinho">
         {% for item in carrinho.itens %}
             {{ macros.item_carrinho(item) }}
         {% else %}
-        <li>O carrinho está vazio <br>Adicione itens para continuar</li>
+            <li class="vazio">O carrinho esta vazio.<br>Adicione itens para continuar!</li>
+        {% endfor %}
     </ul>
-    {% endfor %}
+
     {% if carrinho.itens %}
-    <div>
-        <strong> Total estimado R$ {{total | round(2)}}</strong>
-    </div>
+        <div class="total">
+            <strong>Total estimado: R$ {{ total | round(2) }}</strong>
+        </div>
     {% endif %}
-    <div>
-        <p><a href="/">Voltar para página inicial</a></p>
-    </div>
-</body>
-</html>
+{% endblock %}

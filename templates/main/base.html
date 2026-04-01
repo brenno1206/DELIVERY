@@ -5,26 +5,30 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Delivery UVV{% endblock %}</title>
-        {% block css %} {% endblock %}
+        {% block css %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+        {% endblock %}
+        
     {% endblock %}
 </head>
 <body>
-    <header>
-        <nav>
+    <div class="page">
+        <header>
             {% block navbar %}
-              {% include 'main/partials/navbar.html'   %}
+                {% include 'main/partials/navbar.html'   %}
             {% endblock %}
-        </nav>
-    </header>
-    <main>
-        {% block content %}
-            <!-- Conteudo Principal que será renderizado-->
-        {% endblock %}
-    </main>
-    <footer>
-        {% block footer %}
-           {% include 'main/partials/footer.html'   %}
-        {% endblock %}
-    </footer>
+        </header>
+        <main class="main-content">
+            {% block content %}
+                <!-- Conteudo Principal que será renderizado-->
+            {% endblock %}
+        </main>
+        <footer class="footer">
+            {% block footer %}
+                {% include 'main/partials/footer.html'   %}
+            {% endblock %}
+        </footer>
+    </div>
 </body>
 </html>

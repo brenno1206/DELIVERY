@@ -15,7 +15,7 @@ def create_app():
     return app
 
 
-# py .\make_env.pys
+# py .\make_env.py
 # .\venv\Scripts\activate
 # invoke install
 # $env:FLASK_DEBUG=1

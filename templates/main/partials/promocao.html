@@ -1,2 +1,10 @@
-<strong>Promoção do dia</strong>
-{{ promocao | upper }}
+<div class="card promocao-card">
+    <header class="card-header has-text-centered">
+      <p class="card-header-title"><strong> {{ promocao | upper }} </strong></p>
+      <button class="card-header-icon" aria-label="more options">
+        <span class="icon">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </header>
+</div>

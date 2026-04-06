@@ -5,30 +5,49 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Delivery UVV{% endblock %}</title>
-        {% block css %}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-        <link rel="stylesheet" href="/static/css/style.css">
-        {% endblock %}
-        
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    primary: '#ff7a00',
+                    'primary-dark': '#e66d00',
+                    dark: '#1a1a1a',
+                    darker: '#222222'
+                  }
+                }
+              }
+            }
+          </script>
     {% endblock %}
 </head>
-<body>
-    <div class="page">
-        <header>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="min-h-screen flex flex-col">
+
+        <!-- NAVBAR -->
+        <header class="bg-white shadow">
             {% block navbar %}
-                {% include 'main/partials/navbar.html'   %}
+                {% include 'main/partials/navbar.html' %}
             {% endblock %}
         </header>
-        <main class="main-content">
-            {% block content %}
-                <!-- Conteudo Principal que será renderizado-->
-            {% endblock %}
+
+        <!-- CONTEÚDO -->
+        <main class="flex-1 container mx-auto px-4 py-6">
+            {% block content %}{% endblock %}
         </main>
-        <footer class="footer">
+        
+        <!-- FOOTER -->
+        <footer class="bg-gray-900 text-white text-center py-6 mt-10">
             {% block footer %}
-                {% include 'main/partials/footer.html'   %}
+                {% include 'main/partials/footer.html' %}
             {% endblock %}
         </footer>
+
     </div>
+
 </body>
 </html>

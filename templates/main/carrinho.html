@@ -1,27 +1,28 @@
 {% extends 'main/base.html' %}
 
-
-    {% block titulo %}
-    {{ titulo | default("Meu Carrinho")}}
-    {% endblock %}
+{% block title %}Meu Carrinho{% endblock %}
 
 {% block content %}
-    
 
+<h1 class="text-3xl font-bold mb-6">Meu Carrinho</h1>
+
+<ul class="space-y-4">
     {% import 'main/macros.html' as macros %}
-    <h1>Meu Carrinho</h1>
+    {% for item in carrinho.itens %}
+        {{ macros.item_carrinho(item) }}
+    {% else %}
+        <li class="bg-white p-6 rounded-lg shadow text-center text-gray-500">
+            O carrinho está vazio.<br>Adicione itens para continuar!
+        </li>
+    {% endfor %}
+</ul>
 
-    <ul class="itens-carrinho">
-        {% for item in carrinho.itens %}
-            {{ macros.item_carrinho(item) }}
-        {% else %}
-            <li class="vazio">O carrinho esta vazio.<br>Adicione itens para continuar!</li>
-        {% endfor %}
-    </ul>
+{% if carrinho.itens %}
+    <div class="mt-6 bg-white p-4 rounded-lg shadow text-right">
+        <strong class="text-xl text-green-600">
+            Total: R$ {{ total | round(2) }}
+        </strong>
+    </div>
+{% endif %}
 
-    {% if carrinho.itens %}
-        <div class="total">
-            <strong>Total estimado: R$ {{ total | round(2) }}</strong>
-        </div>
-    {% endif %}
 {% endblock %}

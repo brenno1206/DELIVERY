@@ -1,4 +1,6 @@
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, current_app, render_template, flash, redirect, url_for, request
+from delivery.forms.main import ContatoForm
+
 bp_main  = Blueprint('main', __name__)
 
 @bp_main.route("/")
@@ -20,3 +22,13 @@ def carrinho():
     total = sum(item['preco'] * item['quantidade'] for item in carrinho['itens'])
     current_app.logger.info("O endpoint 'carrinho' foi acessado com sucesso")
     return render_template('main/carrinho.html', titulo="Meus Pedidos", carrinho=carrinho, total=total)
+
+@bp_main.route('/contato', methods=['GET','POST'])
+def contato():
+    form = ContatoForm()
+    if form.validate_on_submit():
+        current_app.logger(f"Mensagem recebida de {form.nome.data}")
+        flash('Mensagem enviada com sucesso"', 'success')
+        return redirect(url_for('main.index'))
+    
+    return render_template('main/contato.html')

@@ -6,6 +6,9 @@ def create_app():
     from delivery.ext.config import init_app as init_config
     init_config(app)
 
+    from delivery.ext.wtf import init_app as init_wtf
+    init_wtf(app)
+
     from delivery.ext.debugtoolbar import init_app as init_toolbar
     init_toolbar(app)
 

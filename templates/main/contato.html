@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container mx-auto px-3">
+    <div class="flex justify-center">
+        <div class="w-full md:w-2/3 lg:w-1/2">
+          <h1 class="text-2xl font-semibold">Entre em contato</h1>
+          {% with messages = get_flashed_messages(with_categories)  %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="notification-is-{{category}}">
+                    {{message}}
+                </div>
+                    
+                {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          <form action="POST">
+            {{form.csrf_token}}
+            <div class="field">
+                <label class="label" for="">{{form.nome.label}}</label>
+                <div class="control">{{form.nome(class="input")}}</div>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

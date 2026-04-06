@@ -1,11 +1,16 @@
-{% macro item_carrinho(item)%}
-<li>
+{% macro item_carrinho(item) %}
+<li class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+
     <div>
-        <h3>{{item.name}}</h3>
-        <p>Quantidade: {{item.quantidade}} x R$ {{item.preco | round(2)}}</p>
+        <h3 class="font-semibold text-lg">{{ item.name }}</h3>
+        <p class="text-gray-500">
+            {{ item.quantidade }} x R$ {{ item.preco | round(2) }}
+        </p>
     </div>
-    <div>
-        R$ {{(item.preco * item.quantidade) | round(2)}}
+
+    <div class="font-bold text-green-600">
+        R$ {{ (item.preco * item.quantidade) | round(2) }}
     </div>
+
 </li>
 {% endmacro %}

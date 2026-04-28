@@ -1,34 +1,43 @@
-from flask import Blueprint, current_app, render_template, flash, redirect, url_for, request
+from flask import Blueprint, render_template, current_app, flash, redirect, url_for, request
 from delivery.forms.main import ContatoForm
 
-bp_main  = Blueprint('main', __name__)
+bp_main = Blueprint("main", __name__)
 
-@bp_main.route("/")
-@bp_main.route("/index")
+@bp_main.route('/')
+@bp_main.route('/index')
 def index():
-    user = {'username':'brenno'}
-    current_app.logger.info("O endpint 'index' foi acessado")
-    return render_template('main/index.html', user=user, promocao='Segunda é dia de pizza em dobro')
+    current_app.logger.debug("Renderizando template index.html")
+    user = {'username': 'brenno'}
+    return render_template('main/index.html', 
+                        user=user,
+                        promocao="Segunda é dia de Pizza em dobro!!!")
 
-@bp_main.route("/carrinho")
+@bp_main.route('/carrinho')
 def carrinho():
     carrinho = {
         'itens': [
-            {'id': 1, 'name': 'Pizza Calabresa', 'preco': 39.99, 'quantidade': 2},
-            {'id': 2, 'name': 'Borda Recheada', 'preco': 5.932, 'quantidade': 2},
-            {'id': 3, 'name': 'Refrigerante 2L', 'preco': 10.4, 'quantidade': 1}
+            {'id': 1, 'name': "Pizza Margherita", 'preco': 49.95, 'quantidade': 1},
+            {'id': 2, 'name': "Refrigerante 2L", 'preco': 8.52, 'quantidade': 2},
+            {'id': 3, 'name': "Borda Recheada", 'preco': 12.358, 'quantidade': 1}
         ]
+        #'itens': []
     }
-    total = sum(item['preco'] * item['quantidade'] for item in carrinho['itens'])
-    current_app.logger.info("O endpoint 'carrinho' foi acessado com sucesso")
-    return render_template('main/carrinho.html', titulo="Meus Pedidos", carrinho=carrinho, total=total)
+    total = sum(item['preco']*item['quantidade'] for item  in carrinho['itens'])
+    return render_template('main/carrinho.html',
+                           carrinho=carrinho,
+                           total=total,
+                           titulo="Meu pedido prefido")
 
-@bp_main.route('/contato', methods=['GET','POST'])
+
+@bp_main.route('/contato', methods=['GET', 'POST'])
 def contato():
     form = ContatoForm()
+
     if form.validate_on_submit():
-        current_app.logger(f"Mensagem recebida de {form.nome.data}")
-        flash('Mensagem enviada com sucesso"', 'success')
+        current_app.logger.info(f"Mensagem recebida do {form.nome.data}")
+        flash('Mensagem enviada com sucesso!', 'success')
         return redirect(url_for('main.index'))
+    else:
+        print(form.errors)
     
-    return render_template('main/contato.html')
+    return render_template('main/contato.html', form=form)

@@ -4,6 +4,19 @@ import os
 import zipfile
 import shutil
 
+def load_env(env: str):
+    """
+    Carrega o arquivo .env correspondente ao ambiente.
+    Ex: dev, test, prod
+    """
+    env_file = f".env.{env}"
+
+    if os.path.exists(env_file):
+        load_dotenv(env_file, override=True)
+        print(f"[ENV] Carregado: {env_file}")
+    else:
+        raise FileNotFoundError(f"{env_file} nao encontrado")
+
 @task
 def install(c, dev=True):
     """
@@ -29,6 +42,15 @@ def run(c):
     Executa a aplicacao Flask.
     """
     c.run("flask run")
+    
+
+@task
+def prod(c):
+    """
+    Executa a aplicacao em modo producao.
+    """
+    load_env("prod")
+    c.run("flask run")
 
 
 @task
@@ -36,7 +58,8 @@ def test(c):
     """
     Executa os testes automatizados.
     """
-    c.run("pytest tests -v")
+    load_env("test")
+    c.run("pytest -v", env={"PYTHONPATH": "."})
 
 
 @task

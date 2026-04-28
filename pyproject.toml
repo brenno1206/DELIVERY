@@ -15,12 +15,13 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {file = "LICENSE"}
 authors = [
-    {name = "Wanderson Santana", email = "wanderson.santana@uvv.br"}
+    {name = "Brenno Breda", email = "brenno.breda@uvv.br"}
 ]
 dependencies = [
     "Flask",
     "dotenv",
     "flask_wtf",
+    "email-validator",
 ]
 
 
@@ -43,6 +44,10 @@ test = [
     "pytest-cov >= 5.0",
     "pytest-flask",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
 
 [tool.setuptools]
 include-package-data = true
